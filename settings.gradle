@@ -15,8 +15,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "Vama Task"
 
-include ':presentation'
+include ':presentation', ':domain', ':data'
 
 project(":presentation").projectDir = file("modules_application/presentation")
+project(":domain").projectDir = file("modules_application/domain")
+project(":data").projectDir = file("modules_application/data")
 
 project(":presentation").name = "app"

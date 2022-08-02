@@ -4,12 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk config.compile_sdk
 
     defaultConfig {
         applicationId "com.example.vamatask"
-        minSdk 25
-        targetSdk 32
+        minSdk config.min_sdk
+        targetSdk config.target_sdk
+        versionCode config.version_code
+        versionName config.version_name
     }
 
     buildTypes {
@@ -28,8 +30,15 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation deps.koin.android
+
+    implementation deps.reactivex.rx_kotlin
+    implementation deps.reactivex.rx_android
 }

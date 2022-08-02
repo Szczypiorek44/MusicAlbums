@@ -1,0 +1,17 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion config.compile_sdk
+    kotlinOptions { jvmTarget = "1.8" }
+}
+
+dependencies {
+    api project(':data')
+
+    implementation deps.koin.android
+
+    implementation deps.reactivex.rx_kotlin
+}

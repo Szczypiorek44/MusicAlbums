@@ -1,0 +1,20 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdkVersion config.compile_sdk
+    kotlinOptions { jvmTarget = "1.8" }
+}
+
+dependencies {
+    implementation deps.squareup.retrofit2
+    implementation deps.squareup.rxjava3_adapter
+    implementation deps.squareup.jackson_converter
+    implementation deps.squareup.logging_interceptor
+
+    implementation deps.koin.android
+
+    implementation deps.reactivex.rx_kotlin
+}

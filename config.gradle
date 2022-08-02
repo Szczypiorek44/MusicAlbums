@@ -1,0 +1,6 @@
+ext.config = [:]
+config.version_code = 1
+config.version_name = "1.0"
+config.min_sdk = 25
+config.target_sdk = 32
+config.compile_sdk = 32
