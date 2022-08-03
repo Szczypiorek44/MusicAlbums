@@ -21,8 +21,8 @@ class Album(
     @JsonProperty("genres")
     val genres: List<Genre>,
 
-    @JsonProperty("url")
-    val url: String,
+    @JsonProperty("artworkUrl100")
+    val artworkUrl: String,
 ) {
     class Genre(
         @JsonProperty("id") val id: Int,

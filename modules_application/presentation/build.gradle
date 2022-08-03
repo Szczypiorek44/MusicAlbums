@@ -43,4 +43,7 @@ dependencies {
     implementation deps.reactivex.rx_android
 
     implementation deps.android.live_event
+
+    implementation deps.glide.glide
+    implementation deps.glide.glide_compiler
 }

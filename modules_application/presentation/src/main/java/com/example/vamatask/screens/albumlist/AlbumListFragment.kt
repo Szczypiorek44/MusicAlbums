@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.data.models.Album
 import com.example.vamatask.R
 import com.example.vamatask.screens.albumlist.AlbumListViewModel.AlbumListEvent.*
@@ -19,7 +18,7 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
 
     private val viewModel by viewModel<AlbumListViewModel>()
 
-    private val adapter by lazy { AlbumAdapter(this) }
+    private val adapter by lazy { AlbumAdapter(this)}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_album_list, container, false)
@@ -38,7 +37,6 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
     }
 
     private fun setupRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 

@@ -38,3 +38,10 @@ versions.rx_android = "3.0.0"
 reactivex.rx_kotlin = "io.reactivex.rxjava3:rxkotlin:$versions.rx_kotlin"
 reactivex.rx_android = "io.reactivex.rxjava3:rxandroid:$versions.rx_android"
 deps.reactivex = reactivex
+
+def glide = [:]
+versions.glide = "4.13.2"
+
+glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
+glide.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
