@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.vamatask.R
-import com.example.vamatask.screens.list.ListFragment
+import com.example.vamatask.screens.albumlist.AlbumListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showListFragment() {
-        showFragment(ListFragment())
+        showFragment(AlbumListFragment())
 //        supportActionBar?.title = getString(R.string.app_name)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
