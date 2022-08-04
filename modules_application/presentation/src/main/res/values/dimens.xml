@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="toolbar_expanded_title_textSize">34sp</dimen>
+    <dimen name="toolbar_expanded_title_marginStart">16dp</dimen>
+    <dimen name="toolbar_expanded_height">65dp</dimen>
+    <dimen name="toolbar_collapsed_title_textSize">16sp</dimen>
+    <dimen name="toolbar_collapsed_height">41dp</dimen>
+
+    <dimen name="albumList_recyclerView_padding">10dp</dimen>
+
     <dimen name="progressbar_size">60dp</dimen>
 
     <dimen name="album_viewholder_margin">6dp</dimen>
