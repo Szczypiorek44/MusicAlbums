@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/artworkImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/image_album_placeholder" />
+
+    <TextView
+        android:id="@+id/artistNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screenEdge_padding"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="@dimen/screenEdge_padding"
+        android:textColor="@color/gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/artworkImageView"
+        tools:text="Bad bunny" />
+
+    <TextView
+        android:id="@+id/albumNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ebony"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/artistNameTextView"
+        app:layout_constraintStart_toStartOf="@id/artistNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/artistNameTextView"
+        tools:text="Un Verano Sin Ti" />
+
+    <TextView
+        android:id="@+id/genreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_border_rounded_blue"
+        android:textColor="@color/blue"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@id/artistNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/albumNameTextView"
+        tools:text="Reggaeton" />
+
+    <TextView
+        android:id="@+id/releaseDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/copyrightTextView"
+        app:layout_constraintEnd_toEndOf="@id/artistNameTextView"
+        app:layout_constraintStart_toStartOf="@id/artistNameTextView"
+        tools:text="Released May 20, 2022" />
+
+    <TextView
+        android:id="@+id/copyrightTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/copyright"
+        app:layout_constraintBottom_toTopOf="@id/visitTheAlbumButton"
+        app:layout_constraintEnd_toEndOf="@id/artistNameTextView"
+        app:layout_constraintStart_toStartOf="@id/artistNameTextView" />
+
+    <Button
+        android:id="@+id/visitTheAlbumButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="47dp"
+        android:text="@string/visit_the_album"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

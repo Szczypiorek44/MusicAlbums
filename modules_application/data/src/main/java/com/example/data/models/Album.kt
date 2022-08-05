@@ -1,9 +1,12 @@
 package com.example.data.models
 
+import android.os.Parcelable
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 class Album(
     @JsonProperty("id")
     val id: Int,
@@ -23,9 +26,14 @@ class Album(
 
     @JsonProperty("artworkUrl100")
     val artworkUrl: String,
-) {
+
+    @JsonProperty("url")
+    val url: String,
+) : Parcelable {
+
+    @Parcelize
     class Genre(
         @JsonProperty("id") val id: Int,
         @JsonProperty("name") val name: String,
-    )
+    ) : Parcelable
 }

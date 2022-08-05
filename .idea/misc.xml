@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2953125" />
+        <entry key="modules_application/presentation/src/main/res/drawable/dupa.xml" value="0.625" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_main.xml" value="0.14114583333333333" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_sraka.xml" value="0.14010416666666667" />
+        <entry key="modules_application/presentation/src/main/res/layout/fragment_album_details.xml" value="0.335" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_album_list.xml" value="0.165" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_list.xml" value="0.14114583333333333" />
         <entry key="modules_application/presentation/src/main/res/layout/item_album.xml" value="0.165" />

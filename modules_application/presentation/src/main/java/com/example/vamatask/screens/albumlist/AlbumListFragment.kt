@@ -14,11 +14,11 @@ import com.example.vamatask.screens.albumlist.viewholders.AlbumViewHolder
 import kotlinx.android.synthetic.main.fragment_album_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
+class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Fragment(), AlbumViewHolder.Callback {
 
     private val viewModel by viewModel<AlbumListViewModel>()
 
-    private val adapter by lazy { AlbumAdapter(this)}
+    private val adapter by lazy { AlbumAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_album_list, container, false)
@@ -33,7 +33,7 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
     }
 
     override fun onAlbumClick(album: Album) {
-
+        onAlbumClick.invoke(album)
     }
 
     private fun setupRecyclerView() {
