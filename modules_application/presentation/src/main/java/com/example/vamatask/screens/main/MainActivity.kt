@@ -23,16 +23,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showListFragment() {
-        showFragment(AlbumListFragment(onAlbumClick = { showDetailsFragment(it) }))
+        showFragment(
+            AlbumListFragment(onAlbumClick = { showDetailsFragment(it) })
+        )
     }
 
     private fun showDetailsFragment(album: Album) {
-        showFragment(AlbumDetailsFragment(album))
+        showFragment(
+            AlbumDetailsFragment(album),
+            true
+        )
     }
 
-    private fun showFragment(fragment: Fragment) {
+    private fun showFragment(fragment: Fragment, shouldAddToBackStack: Boolean = false) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        if (shouldAddToBackStack) {
+            fragmentTransaction.addToBackStack(fragment.javaClass.simpleName)
+        }
         fragmentTransaction.commitAllowingStateLoss()
     }
 }
