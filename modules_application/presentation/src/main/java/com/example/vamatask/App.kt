@@ -1,6 +1,7 @@
 package com.example.vamatask
 
 import android.app.Application
+import com.example.data.di.databaseBuilderModule
 import com.example.data.di.retrofitBuilderModule
 import com.example.domain.di.albumModule
 import com.example.vamatask.di.viewModelModule
@@ -17,7 +18,7 @@ class App : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@App)
-            modules(listOf(viewModelModule, albumModule, retrofitBuilderModule))
+            modules(listOf(viewModelModule, albumModule, retrofitBuilderModule, databaseBuilderModule))
         }
     }
 

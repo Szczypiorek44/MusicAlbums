@@ -45,3 +45,11 @@ versions.glide = "4.13.2"
 glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
 glide.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
+
+def room = [:]
+versions.room = "2.4.3"
+
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava3 = "androidx.room:room-rxjava3:$versions.room"
+deps.room = room

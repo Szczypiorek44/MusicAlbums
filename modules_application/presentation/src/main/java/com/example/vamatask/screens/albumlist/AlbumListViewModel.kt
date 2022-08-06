@@ -3,7 +3,7 @@ package com.example.vamatask.screens.albumlist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.data.models.Album
-import com.example.domain.usecases.AlbumUseCases
+import com.example.domain.AlbumRepository
 import com.hadilq.liveevent.LiveEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class AlbumListViewModel(
-    private val albumUseCases: AlbumUseCases,
+    private val albumRepository: AlbumRepository
 ) : ViewModel() {
 
     private val event = LiveEvent<AlbumListEvent>()
@@ -25,7 +25,7 @@ class AlbumListViewModel(
     }
 
     fun getAlbums() {
-        albumUseCases.getAlbums(100)
+        albumRepository.getAlbums()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { event.value = AlbumListEvent.DownloadStarted }

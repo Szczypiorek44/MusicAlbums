@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+
 }
 
 android {
@@ -18,4 +20,8 @@ dependencies {
     implementation deps.koin.android
 
     implementation deps.reactivex.rx_kotlin
+
+    implementation deps.room.runtime
+    implementation deps.room.rxjava3
+    kapt deps.room.compiler
 }
