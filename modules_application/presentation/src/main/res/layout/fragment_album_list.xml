@@ -31,22 +31,24 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingStart="@dimen/albumList_recyclerView_padding"
-        android:paddingTop="@dimen/albumList_recyclerView_padding"
-        android:paddingEnd="@dimen/albumList_recyclerView_padding"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:spanCount="2"
-        tools:listitem="@layout/item_album" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.example.vamatask.customviews.LoadingLayout
-        android:id="@+id/loadingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/albumList_recyclerView_padding"
+            android:paddingTop="@dimen/albumList_recyclerView_padding"
+            android:paddingEnd="@dimen/albumList_recyclerView_padding"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_album" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

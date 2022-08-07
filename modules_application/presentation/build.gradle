@@ -36,6 +36,7 @@ dependencies {
 
     implementation deps.android.material
     implementation deps.android.constraint_layout
+    implementation deps.android.swiperefreshlayout
 
     implementation deps.koin.android
 

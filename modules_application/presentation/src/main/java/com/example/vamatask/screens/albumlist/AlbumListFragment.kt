@@ -27,7 +27,9 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        swipeRefreshLayout.setOnRefreshListener { viewModel.getAlbums() }
+        recyclerView.adapter = adapter
+
         observeEvents()
 
         viewModel.getAlbums()
@@ -35,10 +37,6 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
 
     override fun onAlbumClick(album: Album) {
         onAlbumClick.invoke(album)
-    }
-
-    private fun setupRecyclerView() {
-        recyclerView.adapter = adapter
     }
 
     private fun observeEvents() {
@@ -49,8 +47,8 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
                     showRetryDownloadDecisionDialog()
                     showError(it.errorMsg)
                 }
-                is DownloadStarted -> loadingLayout.visibility = View.VISIBLE
-                is DownloadFinished -> loadingLayout.visibility = View.GONE
+                is DownloadStarted -> swipeRefreshLayout.isRefreshing = true
+                is DownloadFinished -> swipeRefreshLayout.isRefreshing = false
             }
         }
     }
