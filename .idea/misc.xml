@@ -7,6 +7,8 @@
         <entry key="modules_application/presentation/src/main/res/drawable/dupa.xml" value="0.625" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_main.xml" value="0.14114583333333333" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_sraka.xml" value="0.14010416666666667" />
+        <entry key="modules_application/presentation/src/main/res/layout/dialog_decision.xml" value="0.246875" />
+        <entry key="modules_application/presentation/src/main/res/layout/dialog_retry_albums_download.xml" value="0.246875" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_album_details.xml" value="0.335" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_album_list.xml" value="0.165" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_list.xml" value="0.14114583333333333" />

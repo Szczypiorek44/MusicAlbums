@@ -3,4 +3,7 @@
     <string name="toolbar_title">Top 100 Albums</string>
     <string name="copyright">Copyright 2022 Apple Inc. All rights reserved.</string>
     <string name="visit_the_album">Visit The Album</string>
+    <string name="failed_to_download_albums_would_you_like_to_retry">Failed to download albums.\nWould you like to retry?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

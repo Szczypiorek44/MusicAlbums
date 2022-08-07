@@ -2,6 +2,10 @@
 <resources>
     <dimen name="screenEdge_padding">16dp</dimen>
 
+    <dimen name="textSize_small">12sp</dimen>
+    <dimen name="textSize_normal">16sp</dimen>
+    <dimen name="textSize_huge">34sp</dimen>
+
     <dimen name="toolbar_expanded_title_textSize">34sp</dimen>
     <dimen name="toolbar_expanded_title_marginStart">16dp</dimen>
     <dimen name="toolbar_expanded_height">65dp</dimen>
@@ -9,6 +13,8 @@
     <dimen name="toolbar_collapsed_height">41dp</dimen>
 
     <dimen name="albumList_recyclerView_padding">10dp</dimen>
+
+    <dimen name="dialog_padding">30dp</dimen>
 
     <dimen name="progressbar_size">60dp</dimen>
 
@@ -20,9 +26,6 @@
 
     <dimen name="album_viewholder_artistName_marginBottom">12dp</dimen>
     <dimen name="album_viewholder_artistName_textSize">12sp</dimen>
-
-
-
 
 
 </resources>

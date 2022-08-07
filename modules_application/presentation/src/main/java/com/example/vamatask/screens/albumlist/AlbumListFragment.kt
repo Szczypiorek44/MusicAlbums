@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.data.models.Album
 import com.example.vamatask.R
+import com.example.vamatask.dialogs.DecisionDialog
 import com.example.vamatask.screens.albumlist.AlbumListViewModel.AlbumListEvent.*
 import com.example.vamatask.screens.albumlist.adapters.AlbumAdapter
 import com.example.vamatask.screens.albumlist.viewholders.AlbumViewHolder
@@ -44,11 +45,23 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
         viewModel.liveEvent.observe(viewLifecycleOwner) {
             when (it) {
                 is GetAlbumSuccess -> adapter.setAlbums(it.albumList)
-                is GetAlbumError -> showError(it.errorMsg)
+                is GetAlbumError -> {
+                    showRetryDownloadDecisionDialog()
+                    showError(it.errorMsg)
+                }
                 is DownloadStarted -> loadingLayout.visibility = View.VISIBLE
                 is DownloadFinished -> loadingLayout.visibility = View.GONE
             }
         }
+    }
+
+    private fun showRetryDownloadDecisionDialog() {
+        DecisionDialog.newInstance(R.string.failed_to_download_albums_would_you_like_to_retry)
+            .apply {
+                setOnLeftButtonClick { dismiss() }
+                setOnRightButtonClick { dismiss() }
+            }
+            .show(childFragmentManager, DecisionDialog::class.java.simpleName)
     }
 
     private fun showError(error: String?) = Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
