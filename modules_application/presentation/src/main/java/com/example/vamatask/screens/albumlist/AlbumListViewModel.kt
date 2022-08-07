@@ -3,6 +3,7 @@ package com.example.vamatask.screens.albumlist
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.data.NoNetworkException
 import com.example.data.models.Album
 import com.example.domain.AlbumRepository
 import com.hadilq.liveevent.LiveEvent
@@ -10,6 +11,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.net.SocketTimeoutException
 
 class AlbumListViewModel(
     private val albumRepository: AlbumRepository
@@ -43,14 +45,19 @@ class AlbumListViewModel(
                 },
                 {
                     Log.d(TAG, "getAlbums() error: ${it.localizedMessage}")
-                    event.value = AlbumListEvent.GetAlbumError(it.localizedMessage)
+                    if (it is NoNetworkException || it is SocketTimeoutException) {
+                        event.value = AlbumListEvent.GetAlbumNetworkError
+                    } else {
+                        event.value = AlbumListEvent.GetAlbumOtherError
+                    }
                 })
             .addTo(disposables)
     }
 
     sealed class AlbumListEvent {
         class GetAlbumSuccess(val albumList: List<Album>) : AlbumListEvent()
-        class GetAlbumError(val errorMsg: String?) : AlbumListEvent()
+        object GetAlbumNetworkError : AlbumListEvent()
+        object GetAlbumOtherError : AlbumListEvent()
         object DownloadStarted : AlbumListEvent()
         object DownloadFinished : AlbumListEvent()
     }

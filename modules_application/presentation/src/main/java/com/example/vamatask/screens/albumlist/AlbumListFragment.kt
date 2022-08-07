@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.data.models.Album
 import com.example.vamatask.R
@@ -43,10 +44,8 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
         viewModel.liveEvent.observe(viewLifecycleOwner) {
             when (it) {
                 is GetAlbumSuccess -> adapter.setAlbums(it.albumList)
-                is GetAlbumError -> {
-                    showRetryDownloadDecisionDialog()
-                    showError(it.errorMsg)
-                }
+                is GetAlbumNetworkError -> showRetryDownloadDecisionDialog()
+                is GetAlbumOtherError -> showError(R.string.something_went_wrong)
                 is DownloadStarted -> swipeRefreshLayout.isRefreshing = true
                 is DownloadFinished -> swipeRefreshLayout.isRefreshing = false
             }
@@ -54,7 +53,7 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
     }
 
     private fun showRetryDownloadDecisionDialog() {
-        DecisionDialog.newInstance(R.string.failed_to_download_albums_would_you_like_to_retry)
+        DecisionDialog.newInstance(R.string.download_albums_failed_retry)
             .apply {
                 setOnLeftButtonClick { dismiss() }
                 setOnRightButtonClick { dismiss() }
@@ -62,6 +61,6 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
             .show(childFragmentManager, DecisionDialog::class.java.simpleName)
     }
 
-    private fun showError(error: String?) = Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    private fun showError(@StringRes errorMsg: Int) = Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
 
 }

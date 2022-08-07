@@ -4,10 +4,12 @@ import com.example.data.API_URL
 import com.example.data.BuildConfig
 import com.example.data.album.remote.RemoteAlbumSource
 import com.example.data.album.remote.RemoteAlbumSourceFactory
+import com.example.data.network.NetworkConnectionInterceptor
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.CallAdapter
 import retrofit2.Converter
@@ -30,6 +32,7 @@ val retrofitBuilderModule = module {
     }
     single<OkHttpClient> {
         OkHttpClient.Builder()
+            .addInterceptor(NetworkConnectionInterceptor(androidContext()))
             .addInterceptor(get<HttpLoggingInterceptor>())
             .build()
     }
