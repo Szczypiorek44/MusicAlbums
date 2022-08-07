@@ -1,5 +1,6 @@
 package com.example.vamatask.screens.albumlist
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.data.models.Album
@@ -13,6 +14,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class AlbumListViewModel(
     private val albumRepository: AlbumRepository
 ) : ViewModel() {
+
+    companion object {
+        const val TAG = "AlbumListViewModel"
+    }
 
     private val event = LiveEvent<AlbumListEvent>()
     val liveEvent: LiveData<AlbumListEvent> = event
@@ -31,8 +36,15 @@ class AlbumListViewModel(
             .doOnSubscribe { event.value = AlbumListEvent.DownloadStarted }
             .doFinally { event.value = AlbumListEvent.DownloadFinished }
             .subscribe(
-                { event.value = AlbumListEvent.GetAlbumSuccess(it) },
-                { event.value = AlbumListEvent.GetAlbumError(it.localizedMessage) })
+
+                {
+                    Log.d(TAG, "getAlbums() returned ${it.size} albums")
+                    event.value = AlbumListEvent.GetAlbumSuccess(it)
+                },
+                {
+                    Log.d(TAG, "getAlbums() error: ${it.localizedMessage}")
+                    event.value = AlbumListEvent.GetAlbumError(it.localizedMessage)
+                })
             .addTo(disposables)
     }
 

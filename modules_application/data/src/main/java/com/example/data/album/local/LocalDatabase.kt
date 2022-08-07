@@ -9,7 +9,7 @@ import com.example.data.models.Album
 
 @Database(entities = [(Album::class)], version = 1)
 @TypeConverters(Converters::class)
-abstract class LocalDatabase : RoomDatabase() {
+internal abstract class LocalDatabase : RoomDatabase() {
 
     object Builder {
         fun build(context: Context): LocalDatabaseDAO {

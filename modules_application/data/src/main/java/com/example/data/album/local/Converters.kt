@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import java.util.*
 
 
-class Converters {
+internal class Converters {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {
         return value?.let { Date(it) }

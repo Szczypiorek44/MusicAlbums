@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface LocalDatabaseDAO {
 
-    @Query("SELECT * FROM albums")
+    @Query("SELECT * FROM albums ORDER BY position ASC")
     fun getAlbums(): Single<List<Album>>
 
     @Insert(onConflict = REPLACE)

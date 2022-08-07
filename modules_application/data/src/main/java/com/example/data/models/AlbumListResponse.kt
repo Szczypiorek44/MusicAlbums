@@ -1,12 +1,17 @@
 package com.example.data.models
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class AlbumListResponse(
+data class AlbumListResponse internal constructor(
     @JsonProperty("feed") val feed: Feed
 ) {
-    data class Feed(
-        @JsonProperty("results") val albumList: List<Album>
-    )
+    class Feed @JsonCreator internal constructor(@JsonProperty("results") albumList: List<Album>) {
+        val albumList: List<Album>
+
+        init {
+            this.albumList = albumList.copyWithUpdatedPositions()
+        }
+    }
 }
 
