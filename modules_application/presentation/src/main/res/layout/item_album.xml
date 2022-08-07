@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/album_viewholder_name_marginStart"
             android:layout_marginEnd="@dimen/album_viewholder_name_marginEnd"
             android:textColor="@color/white"
-            android:textSize="@dimen/album_viewholder_name_textSize"
+            android:textSize="@dimen/textSize_normal"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/artistNameTextView"
             tools:text="Un Verano Sin Ti" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/album_viewholder_artistName_marginBottom"
             android:textColor="@color/gray"
-            android:textSize="@dimen/album_viewholder_artistName_textSize"
+            android:textSize="@dimen/textSize_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/albumNameTextView"
             app:layout_constraintStart_toStartOf="@id/albumNameTextView"
