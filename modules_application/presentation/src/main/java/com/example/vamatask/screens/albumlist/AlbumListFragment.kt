@@ -27,12 +27,12 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
 
     private lateinit var onAlbumClick: (album: Album) -> Unit
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_album_list, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_album_list, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         swipeRefreshLayout.setOnRefreshListener { viewModel.refreshAlbums() }
         recyclerView.adapter = adapter
 
@@ -40,9 +40,7 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
 
         if (savedInstanceState != null) return
 
-        viewModel.observeAlbums()
         viewModel.refreshAlbums()
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

@@ -26,26 +26,13 @@ class AlbumListViewModel(
 
     private val disposables = CompositeDisposable()
 
+    init {
+        observeAlbums()
+    }
+
     override fun onCleared() {
         disposables.clear()
         super.onCleared()
-    }
-
-    fun observeAlbums() {
-        Log.d(TAG, "observeAlbums()")
-        albumRepository.observeAlbums()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    Log.d(TAG, "observeAlbums() returned ${it.size} albums")
-                    event.value = AlbumListEvent.GetAlbumSuccess(it)
-                },
-                {
-                    Log.d(TAG, "observeAlbums() error: ${it.localizedMessage}")
-                    event.value = AlbumListEvent.GetAlbumOtherError
-                })
-            .addTo(disposables)
     }
 
     fun refreshAlbums() {
@@ -66,6 +53,23 @@ class AlbumListViewModel(
                     } else {
                         event.value = AlbumListEvent.GetAlbumOtherError
                     }
+                })
+            .addTo(disposables)
+    }
+
+    private fun observeAlbums() {
+        Log.d(TAG, "observeAlbums()")
+        albumRepository.observeAlbums()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Log.d(TAG, "observeAlbums() returned ${it.size} albums")
+                    event.value = AlbumListEvent.GetAlbumSuccess(it)
+                },
+                {
+                    Log.d(TAG, "observeAlbums() error: ${it.localizedMessage}")
+                    event.value = AlbumListEvent.GetAlbumOtherError
                 })
             .addTo(disposables)
     }
