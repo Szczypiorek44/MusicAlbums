@@ -1,8 +1,11 @@
 package com.example.domain
 
 import com.example.data.models.Album
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 
 interface AlbumRepository {
-    fun getAlbums(): Single<List<Album>>
+    fun observeAlbums(): Observable<List<Album>>
+
+    fun refreshAlbums(): Completable
 }

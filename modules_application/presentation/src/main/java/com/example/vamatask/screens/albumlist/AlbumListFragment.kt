@@ -28,12 +28,13 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipeRefreshLayout.setOnRefreshListener { viewModel.getAlbums() }
+        swipeRefreshLayout.setOnRefreshListener { viewModel.refreshAlbums() }
         recyclerView.adapter = adapter
 
         observeEvents()
 
-        viewModel.getAlbums()
+        viewModel.observeAlbums()
+        viewModel.refreshAlbums()
     }
 
     override fun onAlbumClick(album: Album) {
@@ -56,7 +57,10 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
         DecisionDialog.newInstance(R.string.download_albums_failed_retry)
             .apply {
                 setOnLeftButtonClick { dismiss() }
-                setOnRightButtonClick { dismiss() }
+                setOnRightButtonClick {
+                    dismiss()
+                    viewModel.refreshAlbums()
+                }
             }
             .show(childFragmentManager, DecisionDialog::class.java.simpleName)
     }

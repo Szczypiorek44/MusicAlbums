@@ -31,20 +31,36 @@ class AlbumListViewModel(
         super.onCleared()
     }
 
-    fun getAlbums() {
-        albumRepository.getAlbums()
+    fun observeAlbums() {
+        Log.d(TAG, "observeAlbums()")
+        albumRepository.observeAlbums()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Log.d(TAG, "observeAlbums() returned ${it.size} albums")
+                    event.value = AlbumListEvent.GetAlbumSuccess(it)
+                },
+                {
+                    Log.d(TAG, "observeAlbums() error: ${it.localizedMessage}")
+                    event.value = AlbumListEvent.GetAlbumOtherError
+                })
+            .addTo(disposables)
+    }
+
+    fun refreshAlbums() {
+        Log.d(TAG, "refreshAlbums()")
+        albumRepository.refreshAlbums()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { event.value = AlbumListEvent.DownloadStarted }
             .doFinally { event.value = AlbumListEvent.DownloadFinished }
             .subscribe(
-
                 {
-                    Log.d(TAG, "getAlbums() returned ${it.size} albums")
-                    event.value = AlbumListEvent.GetAlbumSuccess(it)
+                    Log.d(TAG, "refreshAlbums() completed")
                 },
                 {
-                    Log.d(TAG, "getAlbums() error: ${it.localizedMessage}")
+                    Log.d(TAG, "refreshAlbums() error: ${it.localizedMessage}")
                     if (it is NoNetworkException || it is SocketTimeoutException) {
                         event.value = AlbumListEvent.GetAlbumNetworkError
                     } else {
