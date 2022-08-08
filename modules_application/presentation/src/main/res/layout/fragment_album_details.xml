@@ -16,6 +16,19 @@
         tools:ignore="ContentDescription"
         tools:src="@drawable/image_album_placeholder" />
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="@dimen/screenEdge_padding"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/background_circle_halftransparent"
+        android:scaleType="center"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/artistNameTextView"
         android:layout_width="0dp"

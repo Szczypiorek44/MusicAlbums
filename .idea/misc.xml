@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2953125" />
+        <entry key="modules_application/presentation/src/main/res/drawable/background_border_rounded_blue.xml" value="0.174" />
+        <entry key="modules_application/presentation/src/main/res/drawable/background_circle_halftransparent.xml" value="0.174" />
         <entry key="modules_application/presentation/src/main/res/drawable/dupa.xml" value="0.625" />
+        <entry key="modules_application/presentation/src/main/res/drawable/ic_icon_chevron_left.xml" value="0.174" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_main.xml" value="0.14114583333333333" />
         <entry key="modules_application/presentation/src/main/res/layout/activity_sraka.xml" value="0.14010416666666667" />
         <entry key="modules_application/presentation/src/main/res/layout/dialog_decision.xml" value="0.246875" />
         <entry key="modules_application/presentation/src/main/res/layout/dialog_retry_albums_download.xml" value="0.246875" />
-        <entry key="modules_application/presentation/src/main/res/layout/fragment_album_details.xml" value="0.165" />
+        <entry key="modules_application/presentation/src/main/res/layout/fragment_album_details.xml" value="0.48703703703703705" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_album_list.xml" value="0.165" />
         <entry key="modules_application/presentation/src/main/res/layout/fragment_list.xml" value="0.14114583333333333" />
         <entry key="modules_application/presentation/src/main/res/layout/item_album.xml" value="0.165" />

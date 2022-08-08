@@ -18,4 +18,6 @@
 
     <color name="transparent20">#33000000</color>
     <color name="transparent100">#00000000</color>
+
+    <color name="transparent_white50">#80ffffff</color>
 </resources>

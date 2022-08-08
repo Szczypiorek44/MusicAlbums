@@ -21,6 +21,8 @@ class AlbumDetailsFragment(private val album: Album) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        backButton.setOnClickListener { activity?.onBackPressed() }
+
         artworkImageView.load(album.artworkUrl)
         artistNameTextView.text = album.artistName
         albumNameTextView.text = album.name
