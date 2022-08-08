@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -46,5 +47,5 @@ dependencies {
     implementation deps.android.live_event
 
     implementation deps.glide.glide
-    implementation deps.glide.glide_compiler
+    kapt deps.glide.glide_compiler
 }
