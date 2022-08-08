@@ -38,9 +38,9 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
 
         observeEvents()
 
-        if (savedInstanceState != null) return
-
-        viewModel.refreshAlbums()
+        if (savedInstanceState == null && adapter.getAlbums().isEmpty()) {
+            viewModel.refreshAlbums()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
