@@ -13,14 +13,19 @@ import com.example.vamatask.dialogs.DecisionDialog
 import com.example.vamatask.screens.albumlist.AlbumListViewModel.AlbumListEvent.*
 import com.example.vamatask.screens.albumlist.adapters.AlbumAdapter
 import com.example.vamatask.screens.albumlist.viewholders.AlbumViewHolder
+import com.example.vamatask.utils.BundleDelegate
 import kotlinx.android.synthetic.main.fragment_album_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Fragment(), AlbumViewHolder.Callback {
+class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
 
     private val viewModel by viewModel<AlbumListViewModel>()
 
     private val adapter by lazy { AlbumAdapter(this) }
+
+    private var Bundle.albums by BundleDelegate.AlbumList("albums")
+
+    private lateinit var onAlbumClick: (album: Album) -> Unit
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_album_list, container, false)
@@ -33,12 +38,30 @@ class AlbumListFragment(private val onAlbumClick: (album: Album) -> Unit) : Frag
 
         observeEvents()
 
+        if (savedInstanceState != null) return
+
         viewModel.observeAlbums()
         viewModel.refreshAlbums()
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.albums = adapter.getAlbums()
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState ?: return
+        adapter.setAlbums(savedInstanceState.albums)
     }
 
     override fun onAlbumClick(album: Album) {
         onAlbumClick.invoke(album)
+    }
+
+    fun setOnAlbumClick(onAlbumClick: (album: Album) -> Unit) {
+        this.onAlbumClick = onAlbumClick
     }
 
     private fun observeEvents() {

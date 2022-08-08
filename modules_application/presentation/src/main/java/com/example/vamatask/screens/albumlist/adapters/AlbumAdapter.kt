@@ -16,6 +16,10 @@ class AlbumAdapter(private val viewHolderCallback: AlbumViewHolder.Callback) : R
         notifyDataSetChanged()
     }
 
+    fun getAlbums(): List<Album> {
+        return albums
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): AlbumViewHolder {
         return AlbumViewHolder(
             LayoutInflater.from(viewGroup.context).inflate(R.layout.item_album, viewGroup, false),

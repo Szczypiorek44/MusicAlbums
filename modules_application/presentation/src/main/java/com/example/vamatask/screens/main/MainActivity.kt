@@ -19,12 +19,16 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-        showListFragment()
+        if (savedInstanceState == null) {
+            showListFragment()
+        }
+
+        setupFragmentManager()
     }
 
     private fun showListFragment() {
         showFragment(
-            AlbumListFragment(onAlbumClick = { showDetailsFragment(it) })
+            AlbumListFragment()
         )
     }
 
@@ -35,12 +39,32 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun setupFragmentManager() {
+        supportFragmentManager.addFragmentOnAttachListener { _, fragment ->
+            setNecessaryFragmentCallbacks(fragment)
+        }
+        supportFragmentManager.fragments.forEach { fragment ->
+            setNecessaryFragmentCallbacks(fragment)
+        }
+    }
+
+    private fun setNecessaryFragmentCallbacks(fragment: Fragment) {
+        when (fragment) {
+            is AlbumListFragment -> fragment.setOnAlbumClick(onAlbumClick())
+        }
+    }
+
+
     private fun showFragment(fragment: Fragment, shouldAddToBackStack: Boolean = false) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         if (shouldAddToBackStack) {
             fragmentTransaction.addToBackStack(fragment.javaClass.simpleName)
         }
-        fragmentTransaction.commitAllowingStateLoss()
+        fragmentTransaction.commit()
+    }
+
+    private fun onAlbumClick(): (album: Album) -> Unit {
+        return { showDetailsFragment(it) }
     }
 }
