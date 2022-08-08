@@ -19,6 +19,17 @@ sealed class BundleDelegate<T>(protected val key: String) : ReadWriteProperty<Bu
         }
     }
 
+    class AlbumDelegate(key: String) : BundleDelegate<Album>(key) {
+
+        override fun setValue(thisRef: Bundle, property: KProperty<*>, value: Album) {
+            thisRef.putParcelable(key, value)
+        }
+
+        override fun getValue(thisRef: Bundle, property: KProperty<*>): Album {
+            return (thisRef.getParcelable<Album>(key) as Album)
+        }
+    }
+
     class AlbumList(key: String) : BundleDelegate<List<Album>>(key) {
 
         override fun setValue(thisRef: Bundle, property: KProperty<*>, value: List<Album>) {

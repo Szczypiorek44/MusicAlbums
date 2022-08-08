@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDetailsFragment(album: Album) {
         showFragment(
-            AlbumDetailsFragment(album),
+            AlbumDetailsFragment.newInstance(album),
             true
         )
     }
