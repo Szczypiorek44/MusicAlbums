@@ -17,9 +17,9 @@ dependencies {
     implementation deps.squareup.jackson_converter
     implementation deps.squareup.logging_interceptor
 
-    implementation deps.koin.android
+    api deps.koin.android
 
-    implementation deps.reactivex.rx_kotlin
+    api deps.reactivex.rx_kotlin
 
     implementation deps.room.runtime
     implementation deps.room.rxjava3

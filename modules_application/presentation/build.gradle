@@ -39,11 +39,6 @@ dependencies {
     implementation deps.android.constraint_layout
     implementation deps.android.swiperefreshlayout
 
-    implementation deps.koin.android
-
-    implementation deps.reactivex.rx_kotlin
-    implementation deps.reactivex.rx_android
-
     implementation deps.android.live_event
 
     implementation deps.glide.glide
