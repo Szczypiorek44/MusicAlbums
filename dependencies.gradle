@@ -55,3 +55,13 @@ room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
 room.rxjava3 = "androidx.room:room-rxjava3:$versions.room"
 deps.room = room
+
+//============= TEST DEPENDENCIES =================
+ext.tests = [:]
+versions.junit = "4.13.2"
+versions.androidx_core_testing = "2.1.0"
+versions.mockito_kotlin = "4.0.0"
+
+tests.junit = "junit:junit:$versions.junit"
+tests.androidx_core_testing = "androidx.arch.core:core-testing:$versions.androidx_core_testing"
+tests.mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:$versions.mockito_kotlin"

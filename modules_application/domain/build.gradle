@@ -14,4 +14,9 @@ dependencies {
     implementation deps.koin.android
 
     implementation deps.reactivex.rx_kotlin
+    implementation deps.reactivex.rx_android
+
+    testImplementation tests.junit
+    testImplementation tests.androidx_core_testing
+    testImplementation tests.mockito_kotlin
 }

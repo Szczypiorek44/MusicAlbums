@@ -3,10 +3,10 @@ package com.example.data.models
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class AlbumListResponse internal constructor(
+data class AlbumListResponse constructor(
     @JsonProperty("feed") val feed: Feed
 ) {
-    class Feed @JsonCreator internal constructor(@JsonProperty("results") albumList: List<Album>) {
+    class Feed @JsonCreator constructor(@JsonProperty("results") albumList: List<Album>) {
         val albumList: List<Album>
 
         init {
@@ -14,4 +14,3 @@ data class AlbumListResponse internal constructor(
         }
     }
 }
-

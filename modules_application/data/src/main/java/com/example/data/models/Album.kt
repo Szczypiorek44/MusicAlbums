@@ -12,7 +12,7 @@ import java.util.*
 
 @Entity(tableName = "albums")
 @Parcelize
-data class Album internal constructor(
+data class Album constructor(
     @ColumnInfo
     @PrimaryKey
     val id: Int,
@@ -40,7 +40,7 @@ data class Album internal constructor(
 ) : Parcelable {
 
     @JsonCreator
-    internal constructor(
+    constructor(
         @JsonProperty("id")
         id: Int,
 
@@ -66,7 +66,7 @@ data class Album internal constructor(
 
     @Entity(tableName = "genres")
     @Parcelize
-    data class Genre internal constructor(
+    data class Genre constructor(
         @ColumnInfo
         @JsonProperty("id")
         val id: Int,
