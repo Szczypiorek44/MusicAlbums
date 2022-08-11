@@ -1,6 +1,6 @@
 # Music Albums app
 
-[Link to video](https://youtu.be/52ZDDIs4kck)
+[Link to video](https://youtu.be/oVi1BADNSqo)
 
 This application displays music albums. The app consists of 2 main screens:<br />
 
