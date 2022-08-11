@@ -9,7 +9,7 @@
 
     <dimen name="toolbar_expanded_title_marginStart">16dp</dimen>
     <dimen name="toolbar_expanded_height">65dp</dimen>
-    <dimen name="toolbar_collapsed_height">41dp</dimen>
+    <dimen name="toolbar_collapsed_height">26dp</dimen>
 
     <dimen name="albumList_recyclerView_padding">10dp</dimen>
 
