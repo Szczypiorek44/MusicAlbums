@@ -7,14 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.data.models.Album
 import com.example.vamatask.R
 import com.example.vamatask.dialogs.DecisionDialog
-import com.example.vamatask.screens.albumlist.AlbumListViewModel.AlbumListEvent.*
+import com.example.vamatask.screens.albumlist.AlbumListViewModel.AlbumListState.*
 import com.example.vamatask.screens.albumlist.adapters.AlbumAdapter
 import com.example.vamatask.screens.albumlist.viewholders.AlbumViewHolder
 import com.example.vamatask.utils.BundleDelegate
 import kotlinx.android.synthetic.main.fragment_album_list.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
@@ -63,13 +68,18 @@ class AlbumListFragment : Fragment(), AlbumViewHolder.Callback {
     }
 
     private fun observeEvents() {
-        viewModel.liveEvent.observe(viewLifecycleOwner) {
-            when (it) {
-                is GetAlbumSuccess -> adapter.setAlbums(it.albumList)
-                is GetAlbumNetworkError -> showRetryDownloadDecisionDialog()
-                is GetAlbumOtherError -> showError(R.string.something_went_wrong)
-                is DownloadStarted -> swipeRefreshLayout.isRefreshing = true
-                is DownloadFinished -> swipeRefreshLayout.isRefreshing = false
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.getState().collect {
+                    when (it) {
+                        DoNothing -> {}
+                        is GetAlbumSuccess -> adapter.setAlbums(it.albumList)
+                        is GetAlbumNetworkError -> showRetryDownloadDecisionDialog()
+                        is GetAlbumOtherError -> showError(R.string.something_went_wrong)
+                        is DownloadStarted -> swipeRefreshLayout.isRefreshing = true
+                        is DownloadFinished -> swipeRefreshLayout.isRefreshing = false
+                    }
+                }
             }
         }
     }

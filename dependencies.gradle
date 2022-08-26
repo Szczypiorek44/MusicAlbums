@@ -5,16 +5,16 @@ def versions = [:]
 ext.deps = [:]
 
 def android = [:]
+versions.lifecycle_runtime_ktx = "2.5.1"
 versions.material = "1.6.1"
 versions.constraint_layout = "2.1.4"
 versions.swiperefreshlayout = "1.1.0"
-versions.live_event = "1.3.0"
 versions.multidex = "1.0.3"
 
+android.lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle_runtime_ktx"
 android.material = "com.google.android.material:material:$versions.material"
 android.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 android.swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swiperefreshlayout"
-android.live_event = "com.github.hadilq:live-event:$versions.live_event"
 deps.android = android
 
 def koin = [:]

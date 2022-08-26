@@ -35,11 +35,10 @@ android {
 dependencies {
     implementation project(':domain')
 
+    implementation deps.android.lifecycle_runtime_ktx
     implementation deps.android.material
     implementation deps.android.constraint_layout
     implementation deps.android.swiperefreshlayout
-
-    implementation deps.android.live_event
 
     implementation deps.glide.glide
     kapt deps.glide.glide_compiler
