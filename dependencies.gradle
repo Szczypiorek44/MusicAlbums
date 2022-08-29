@@ -28,18 +28,9 @@ versions.retrofit = "2.9.0"
 versions.okhttp = "4.10.0"
 
 squareup.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-squareup.rxjava3_adapter = "com.squareup.retrofit2:adapter-rxjava3:$versions.retrofit"
 squareup.jackson_converter = "com.squareup.retrofit2:converter-jackson:$versions.retrofit"
 squareup.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
 deps.squareup = squareup
-
-def reactivex = [:]
-versions.rx_kotlin = "3.0.1"
-versions.rx_android = "3.0.0"
-
-reactivex.rx_kotlin = "io.reactivex.rxjava3:rxkotlin:$versions.rx_kotlin"
-reactivex.rx_android = "io.reactivex.rxjava3:rxandroid:$versions.rx_android"
-deps.reactivex = reactivex
 
 def glide = [:]
 versions.glide = "4.13.2"
@@ -53,7 +44,7 @@ versions.room = "2.4.3"
 
 room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
-room.rxjava3 = "androidx.room:room-rxjava3:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
 deps.room = room
 
 //============= TEST DEPENDENCIES =================

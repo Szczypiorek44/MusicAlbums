@@ -4,11 +4,13 @@ import android.util.Log
 import com.example.data.album.local.LocalDatabaseDAO
 import com.example.data.album.remote.RemoteAlbumSource
 import com.example.data.models.Album
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.withContext
 
 class AlbumRepositoryImpl(
+    private val dispatcher: CoroutineDispatcher,
     private val localDatabaseDAO: LocalDatabaseDAO,
     private val remoteAlbumSource: RemoteAlbumSource
 ) : AlbumRepository {
@@ -19,37 +21,46 @@ class AlbumRepositoryImpl(
         const val ALBUMS_TO_DOWNLOAD_AMOUNT = 100
     }
 
-    override fun observeAlbums(): Observable<List<Album>> =
-        localDatabaseDAO.observeAlbums()
-            .skip(1) //skip first value after subscribing so it will only emit values when refreshAlbums() is invoked
+    override suspend fun observeAlbums(): Flow<List<Album>> =
+        withContext(dispatcher) {
+            localDatabaseDAO.observeAlbums()
+                .drop(1) //drop first value after subscribing so it will only emit values when refreshAlbums() is invoked
+        }
 
-    override fun refreshAlbums(): Completable =
-        localDatabaseDAO.getAlbums()
-            .flatMapCompletable { downloadAndStoreAlbums(it) }
 
-    private fun downloadAndStoreAlbums(storedAlbums: List<Album>): Completable =
-        downloadAlbums()
-            .onErrorResumeNext {
-                if (storedAlbums.isNotEmpty()) {
-                    Single.just(storedAlbums)
-                } else {
-                    Single.error(it)
-                }
+    override suspend fun refreshAlbums() {
+        withContext(dispatcher) {
+            val storedAlbums = localDatabaseDAO.getAlbums()
+            downloadAndStoreAlbums(storedAlbums)
+        }
+    }
+
+    private suspend fun downloadAndStoreAlbums(storedAlbums: List<Album>) {
+        val albumList = try {
+            downloadAlbums()
+        } catch (e: Exception) {
+            Log.d(TAG, "Failed to download albums. Checking if can continue")
+            if (storedAlbums.isNotEmpty()) {
+                Log.d(TAG, "Continuing with stored albums")
+                storedAlbums
+            } else {
+                throw e
             }
-            .flatMapCompletable { storeAlbums(it) }
+        }
+        storeAlbums(albumList)
+    }
 
-    private fun downloadAlbums(): Single<List<Album>> {
+    private suspend fun downloadAlbums(): List<Album> {
         Log.d(TAG, "downloading albums")
-        return remoteAlbumSource.getAlbums(ALBUMS_TO_DOWNLOAD_AMOUNT)
-            .map { response -> response.feed.albumList }
-            .doOnSuccess { Log.d(TAG, "downloaded ${it.size} albums") }
+        return remoteAlbumSource.getAlbums(ALBUMS_TO_DOWNLOAD_AMOUNT).feed.albumList
+            .also { Log.d(TAG, "downloaded ${it.size} albums") }
     }
 
 
-    private fun storeAlbums(albums: List<Album>): Completable {
+    private fun storeAlbums(albums: List<Album>) {
         Log.d(TAG, "storing albums")
-        return localDatabaseDAO.clearAlbums()
-            .andThen(localDatabaseDAO.insertAlbums(albums))
-            .doOnComplete { Log.d(TAG, "storing albums completed") }
+        localDatabaseDAO.clearAlbums()
+        localDatabaseDAO.insertAlbums(albums)
+        Log.d(TAG, "storing albums completed")
     }
 }

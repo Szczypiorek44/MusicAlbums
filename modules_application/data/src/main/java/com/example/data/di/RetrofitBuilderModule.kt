@@ -11,10 +11,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 @Suppress("RemoveExplicitTypeArguments")
@@ -26,7 +24,6 @@ val retrofitBuilderModule = module {
         Retrofit.Builder()
             .baseUrl(API_URL)
             .client(get())
-            .addCallAdapterFactory(get())
             .addConverterFactory(get())
             .build()
     }
@@ -35,9 +32,6 @@ val retrofitBuilderModule = module {
             .addInterceptor(NetworkConnectionInterceptor(androidContext()))
             .addInterceptor(get<HttpLoggingInterceptor>())
             .build()
-    }
-    single<CallAdapter.Factory> {
-        RxJava3CallAdapterFactory.create()
     }
     single<Converter.Factory> {
         JacksonConverterFactory.create(get())

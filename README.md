@@ -15,8 +15,7 @@ Ingredients:<br />
 
 - Clean Architecture<br />
 - MVVM<br />
-- LiveData<br />
-- ReactiveX<br />
+- Coroutines<br />
 - Koin dependency injection<br />
 - Room Database<br />
 

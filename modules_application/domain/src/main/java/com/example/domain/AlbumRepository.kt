@@ -1,11 +1,10 @@
 package com.example.domain
 
 import com.example.data.models.Album
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.flow.Flow
 
 interface AlbumRepository {
-    fun observeAlbums(): Observable<List<Album>>
+    suspend fun observeAlbums(): Flow<List<Album>>
 
-    fun refreshAlbums(): Completable
+    suspend fun refreshAlbums()
 }

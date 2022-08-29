@@ -5,23 +5,21 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.example.data.models.Album
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LocalDatabaseDAO {
 
     @Query("SELECT * FROM albums ORDER BY position ASC")
-    fun observeAlbums(): Observable<List<Album>>
+    fun observeAlbums(): Flow<List<Album>>
 
     @Query("SELECT * FROM albums ORDER BY position ASC")
-    fun getAlbums(): Single<List<Album>>
+    fun getAlbums(): List<Album>
 
     @Insert(onConflict = REPLACE)
-    fun insertAlbums(items: List<Album>): Completable
+    fun insertAlbums(items: List<Album>)
 
     @Query("Delete from albums")
-    fun clearAlbums(): Completable
+    fun clearAlbums()
 
 }

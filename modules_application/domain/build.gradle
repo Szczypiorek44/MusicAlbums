@@ -11,8 +11,6 @@ android {
 dependencies {
     api project(':data')
 
-    api deps.reactivex.rx_android
-
     testImplementation tests.junit
     testImplementation tests.androidx_core_testing
     testImplementation tests.mockito_kotlin
