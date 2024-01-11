@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import kotlinx.parcelize.Parcelize
 import java.util.*
@@ -66,6 +67,7 @@ data class Album constructor(
 
     @Entity(tableName = "genres")
     @Parcelize
+    @JsonIgnoreProperties(ignoreUnknown = true)
     data class Genre constructor(
         @ColumnInfo
         @JsonProperty("id")
