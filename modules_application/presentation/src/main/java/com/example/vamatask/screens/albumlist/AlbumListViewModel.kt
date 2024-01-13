@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.NoNetworkException
 import com.example.data.models.Album
 import com.example.domain.AlbumRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class AlbumListViewModel(
 
     fun refreshAlbums() {
         Log.d(TAG, "refreshAlbums()")
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             state.value = AlbumListState.DownloadStarted
             try {
                 albumRepository.refreshAlbums()
@@ -48,7 +49,7 @@ class AlbumListViewModel(
 
     private fun observeAlbums() {
         Log.d(TAG, "observeAlbums()")
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 albumRepository.observeAlbums().collect() {
                     Log.d(TAG, "observeAlbums() returned ${it.size} albums")

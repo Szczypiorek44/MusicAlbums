@@ -4,13 +4,10 @@ import android.util.Log
 import com.example.data.album.local.LocalDatabaseDAO
 import com.example.data.album.remote.RemoteAlbumSource
 import com.example.data.models.Album
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.withContext
 
 class AlbumRepositoryImpl(
-    private val dispatcher: CoroutineDispatcher,
     private val localDatabaseDAO: LocalDatabaseDAO,
     private val remoteAlbumSource: RemoteAlbumSource
 ) : AlbumRepository {
@@ -21,18 +18,15 @@ class AlbumRepositoryImpl(
         const val ALBUMS_TO_DOWNLOAD_AMOUNT = 100
     }
 
-    override suspend fun observeAlbums(): Flow<List<Album>> =
-        withContext(dispatcher) {
-            localDatabaseDAO.observeAlbums()
-                .drop(1) //drop first value after subscribing so it will only emit values when refreshAlbums() is invoked
-        }
+    override suspend fun observeAlbums(): Flow<List<Album>> {
+        return localDatabaseDAO.observeAlbums()
+            .drop(1) //drop first value after subscribing so it will only emit values when refreshAlbums() is invoked
+    }
 
 
     override suspend fun refreshAlbums() {
-        withContext(dispatcher) {
-            val storedAlbums = localDatabaseDAO.getAlbums()
-            downloadAndStoreAlbums(storedAlbums)
-        }
+        val storedAlbums = localDatabaseDAO.getAlbums()
+        downloadAndStoreAlbums(storedAlbums)
     }
 
     private suspend fun downloadAndStoreAlbums(storedAlbums: List<Album>) {
